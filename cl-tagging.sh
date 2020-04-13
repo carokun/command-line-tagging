@@ -1,15 +1,4 @@
 #!/bin/bash
-
-#./cl-tagging.sh add <tagname> -f <filename> adds a tag to the specified file.
-#./cl-tagging.sh add <tagname> -d <folder>  adds a tag to all the files in the specified folder.
-#./cl-tagging.sh add <tagname> -d <folder> -e <extension>  adds a tag to all the files with the specified extension in the specified folder.
-#./cl-tagging.sh remove <tagname> -f <filename> removes a tag to the specified file.
-#./cl-tagging.sh remove <tagname> -d <folder>  removes a tag to all the files in the specified folder.
-#./cl-tagging.sh remove <tagname> -d <folder> -e <extension> removes a tag to all the files with the specified extension in the specified folder.
-#./cl-tagging.sh remove <tagname> removes the given tag from all the files its present on.
-#./cl-tagging.sh view <filename> prints all the tags (if any) for a given file.
-#./cl-tagging.sh list <tagname> prints a list of all the files with this tag.
-#./cl-tagging.sh copy <tagname> <new_directory> copies all the files with this tag to the given directory.
  
 has_f=1
 has_d=1
