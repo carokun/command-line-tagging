@@ -6,6 +6,7 @@
 #./cl-tagging.sh remove <tagname> -f <filename> removes a tag to the specified file.
 #./cl-tagging.sh remove <tagname> -d <folder>  removes a tag to all the files in the specified folder.
 #./cl-tagging.sh remove <tagname> -d <folder> -e <extension> removes a tag to all the files with the specified extension in the specified folder.
+#./cl-tagging.sh remove <tagname> removes the given tag from all the files its present on.
 #./cl-tagging.sh view <filename> prints all the tags (if any) for a given file.
 #./cl-tagging.sh list <tagname> prints a list of all the files with this tag.
 #./cl-tagging.sh copy <tagname> <new_directory> copies all the files with this tag to the given directory.
@@ -65,12 +66,16 @@ then
     if [[ has_f -eq 0 ]]
     then
         python3 tag.py $command_type $tag_name $file
-    elif [[ has_e -eq 0 ]]
+    elif [[ has_d -eq 0 && has_e -eq 0 ]]
     then
         files=$(ls $dir | grep $extension | tr '\n' ' ')
         python3 tag.py $command_type $tag_name $files
-    else
+    elif [[ has_d -eq 0 ]]
+    then
         files=$(ls $dir | tr '\n' ' ')
+        python3 tag.py $command_type $tag_name $files
+    else
+        files="$(python3 tag.py list $tag_name | tr '\n' ' ')"
         python3 tag.py $command_type $tag_name $files
     fi
 elif [[ $command_type == "view" ]]
