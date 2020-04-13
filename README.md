@@ -5,9 +5,9 @@ To use our tool, call ./cl-tagging.sh with the appropriate arguments. There are 
 
 1. ADD commands
 
-./cl-tagging.sh add <tagname> -f <filename> adds a tag to the specified file.
-./cl-tagging.sh add <tagname> -d <folder>  adds a tag to all the files in the specified folder.
-./cl-tagging.sh add <tagname> -d <folder> -e <extension>  adds a tag to all the files with the specified extension in the specified folder.
+- ./cl-tagging.sh add <tagname> -f <filename> adds a tag to the specified file.
+- ./cl-tagging.sh add <tagname> -d <folder>  adds a tag to all the files in the specified folder.
+- ./cl-tagging.sh add <tagname> -d <folder> -e <extension>  adds a tag to all the files with the specified extension in the specified folder.
 
 2. REMOVE commands
 
