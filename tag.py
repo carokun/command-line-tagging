@@ -43,18 +43,20 @@ Saves the tag_to_files, file_to_tags dictionaries as pickle files
 """
 def save_data(tag_to_files, file_to_tags):
 	pickle.dump(tag_to_files, open(".tag_to_files.p", "wb"))
-	pickle.dump(file_to_tags, open(".file_to_tags.p", "rb"))
-
+	pickle.dump(file_to_tags, open(".file_to_tags.p", "wb"))
 
 
 def main(argv):
 	tag_to_files, file_to_tags = load_data()
-
+	print(tag_to_files, file_to_tags)
 	command = argv[0].lower()
 
 	if command == 'add':
-	 	tag = argv[1].lower()
-	 	files = argv[2:]
+		tag = argv[1].lower()
+		files = argv[2:]
+		add_tags(tag, files, tag_to_files, file_to_tags)
+
+
 		
 
 if __name__ == "__main__":
