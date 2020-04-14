@@ -22,12 +22,20 @@ def add_tags(tag, files, tag_to_files, file_to_tags):
 
 	save_data(tag_to_files, file_to_tags)
 
-
+"""
+Returns all the tags for the given file
+"""
 def view_tags(file, file_to_tags):
 	tags = list(file_to_tags[file]) if file in file_to_tags else []
-	tags_str = ', '.join([str(elem) for elem in tags])
-	final_str = "The tags for " + file + " are: "+ tags_str
-	return final_str
+	return tags
+
+"""
+Returns all the files tagged with the given tag
+"""
+
+def view_files(tag, tag_to_files):
+	files = list(tag_to_files[tag]) if tag in tag_to_files else []
+	return files
 
 """
 Loads the tag_to_files, file_to_tags dictionaries if they exist. 
@@ -65,12 +73,15 @@ def main(argv):
 	if command == "view":
 		file = argv[1]
 		tags = view_tags(file, file_to_tags)
-		print(tags)
+		tags_str = ', '.join([str(elem) for elem in tags])
+		print("The tags for", file, "are:", tags_str)
 
+
+	if command == "list":
+		tag = argv[1].lower()
+		files = view_files(tag, tag_to_files)
+		files_str = ', '.join([str(elem) for elem in files])
+		print("The files tagged with", tag, "are:", files_str)
 	 
-
-
-		
-
 if __name__ == "__main__":
    main(sys.argv[1:])
