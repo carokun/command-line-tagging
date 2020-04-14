@@ -22,6 +22,13 @@ def add_tags(tag, files, tag_to_files, file_to_tags):
 
 	save_data(tag_to_files, file_to_tags)
 
+
+def view_tags(file, file_to_tags):
+	tags = list(file_to_tags[file]) if file in file_to_tags else []
+	tags_str = ', '.join([str(elem) for elem in tags])
+	final_str = "The tags for " + file + " are: "+ tags_str
+	return final_str
+
 """
 Loads the tag_to_files, file_to_tags dictionaries if they exist. 
 Otherwise, will initailize them to empty dictionaries
@@ -48,13 +55,19 @@ def save_data(tag_to_files, file_to_tags):
 
 def main(argv):
 	tag_to_files, file_to_tags = load_data()
-	print(tag_to_files, file_to_tags)
 	command = argv[0].lower()
 
 	if command == 'add':
 		tag = argv[1].lower()
 		files = argv[2:]
 		add_tags(tag, files, tag_to_files, file_to_tags)
+
+	if command == "view":
+		file = argv[1]
+		tags = view_tags(file, file_to_tags)
+		print(tags)
+
+	 
 
 
 		
