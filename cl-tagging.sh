@@ -1,8 +1,5 @@
 #!/bin/bash
 
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
 has_f=1
 has_d=1
 has_e=1
@@ -26,7 +23,7 @@ do
         file=${!j}
         if [[ ! -f $file ]]
         then
-            echo -e "${RED}ERROR: File $file does not exist.${NC}" 1>&2
+            echo -e "ERROR: File $file does not exist." 1>&2
             exit 1
         fi
     elif [[ $i == "-e" ]]
@@ -41,7 +38,7 @@ do
         dir=${!j}
         if [[ ! -d $dir ]]
         then
-            echo "${RED}ERROR: Directory $dir does not exist.${NC}" 1>&2
+            echo "ERROR: Directory $dir does not exist." 1>&2
             exit 1
         fi
     fi
@@ -63,7 +60,7 @@ then
         files=$(find $dir -type f -maxdepth 1 | tr '\n' ' ')
         python3 tag.py $command_type $tag_name $files
     else
-        echo "${RED}ERROR: The add argument must be ran with -f <filename> or -d <directory>${NC}" 1>&2
+        echo "ERROR: The add argument must be ran with -f <filename> or -d <directory>" 1>&2
         exit 127
     fi
 elif [[ $command_type == "remove" ]]
@@ -88,7 +85,7 @@ elif [[ $command_type == "view" ]]
 then
     if [[ ! -f $2 ]]
     then
-        echo "${RED}ERROR: File $file does not exist.${NC}" 1>&2
+        echo "ERROR: File $file does not exist." 1>&2
         exit 1
     fi
     python3 tag.py $*
