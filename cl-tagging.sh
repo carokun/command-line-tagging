@@ -1,5 +1,8 @@
 #!/bin/bash
- 
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 has_f=1
 has_d=1
 has_e=1
@@ -14,7 +17,7 @@ for i in "$@"
 do
     if [[ $i == "-h" ]]
     then
-        cat help.txt
+        ./help.sh
         exit 0
     elif [[ $i == "-f" ]]
     then
@@ -23,7 +26,7 @@ do
         file=${!j}
         if [[ ! -f $file ]]
         then
-            echo "ERROR: File $file does not exist." 1>&2
+            echo -e "${RED}ERROR: File $file does not exist.${NC}" 1>&2
             exit 1
         fi
     elif [[ $i == "-e" ]]
@@ -38,7 +41,7 @@ do
         dir=${!j}
         if [[ ! -d $dir ]]
         then
-            echo "ERROR: Directory $dir does not exist." 1>&2
+            echo "${RED}ERROR: Directory $dir does not exist.${NC}" 1>&2
             exit 1
         fi
     fi
@@ -60,7 +63,7 @@ then
         files=$(find $dir -type f -maxdepth 1 | tr '\n' ' ')
         python3 tag.py $command_type $tag_name $files
     else
-        echo "ERROR: The add argument must be ran with -f <filename> or -d <directory>" 1>&2
+        echo "${RED}ERROR: The add argument must be ran with -f <filename> or -d <directory>${NC}" 1>&2
         exit 127
     fi
 elif [[ $command_type == "remove" ]]
@@ -85,7 +88,7 @@ elif [[ $command_type == "view" ]]
 then
     if [[ ! -f $2 ]]
     then
-        echo "ERROR: File $file does not exist." 1>&2
+        echo "${RED}ERROR: File $file does not exist.${NC}" 1>&2
         exit 1
     fi
     python3 tag.py $*
@@ -97,8 +100,7 @@ then
     tag_name=$2
     dir=$3
     mkdir -p $dir
-    
+
     files="$(python3 tag.py list $tag_name | sed 's/^.*://' | tr ',' ' ')"
     cp $files $dir
 fi
-
